@@ -1,0 +1,9 @@
+global using Microsoft.AspNetCore.Http.HttpResults;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Logging;
+global using System.ComponentModel.DataAnnotations;
+global using System.Security.Claims;
+global using Carter;
+global using Carter.OpenApi;
+global using FluentValidation;
+global using LinkUp.Core.DTOs;

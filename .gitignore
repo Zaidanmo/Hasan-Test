@@ -1,0 +1,22 @@
+# .NET build output
+**/bin/
+**/obj/
+
+# Debug/build files
+*.pdb
+*.cache
+*.dll
+*.exe
+
+# SQLite sidecar files
+*.db-shm
+*.db-wal
+*.sqlite-shm
+*.sqlite-wal
+
+# IDE files
+.idea/
+.vscode/
+
+# Uploaded profile pictures (user content, not source)
+apps/dotnet/Api/uploads/

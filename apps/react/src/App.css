@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap");
+
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; min-height: 100%; }
+
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  background: #f7eef3;
+  color: #1b1b1f;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+.overflow-y-auto::-webkit-scrollbar { width: 4px; }
+.overflow-y-auto::-webkit-scrollbar-track { background: transparent; }
+.overflow-y-auto::-webkit-scrollbar-thumb { background: #e0c8d0; border-radius: 99px; }
+.overflow-y-auto::-webkit-scrollbar-thumb:hover { background: #ff6978; }
+
+/* ── Shimmer gradient bar (complex bg not possible in Tailwind) */
+.shimmer-bar {
+  background: linear-gradient(
+          90deg,
+          #FFD400 0%,
+          #FF6978 35%,
+          #FFD400 70%,
+          #FF6978 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer 2.2s linear infinite;
+}
+/* Keyframe must also live here for shimmer-bar since it's a CSS class not a Tailwind utility */
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+/* ── SVG tick draw animation ───────────────────────────────── */
+@keyframes draw {
+  from { stroke-dashoffset: 40; }
+  to   { stroke-dashoffset: 0;  }
+}
+.animate-draw { animation: draw 0.35s ease both; }
+
+/* ── Hover lift card ───────────────────────────────────────── */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(122, 0, 63, 0.14);
+}
+
+/* ── Button press (global micro-interaction) ───────────────── */
+button:active:not(:disabled) { transform: scale(0.97); }

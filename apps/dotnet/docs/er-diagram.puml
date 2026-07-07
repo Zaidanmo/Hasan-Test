@@ -1,0 +1,123 @@
+@startuml LinkUp-ER
+title LinkUp — Database ER Diagram
+
+hide circle
+skinparam linetype ortho
+skinparam shadowing false
+skinparam roundcorner 6
+skinparam entity {
+  BackgroundColor #FBFBFE
+  BorderColor #7F77DD
+  ArrowColor #8079C9
+}
+
+entity Users {
+  * Id : guid <<PK>>
+  --
+  * Username : string <<UK>>
+  * Email : string <<UK>>
+  ContactEmail : string
+  Password : string
+  Bio : string
+  CreatedAt : datetime
+  ProfilePictureFileName : string?
+  FirstName : string
+  Surname : string
+  TelephoneNumber : string
+  Degree : string
+  Country : string
+  DistinctHobby : string
+  MotherLanguageId : int <<FK>>
+  TargetLanguageId : int <<FK>>
+  TargetLanguageLevel : enum
+  TandemFormId : int <<FK>>
+  TandemFrequencyId : int <<FK>>
+}
+
+entity Language {
+  * Id : int <<PK>>
+  --
+  * Code : string <<UK>>
+  DisplayName : string
+  IsActive : bool
+  SortOrder : int
+}
+
+entity Hobby {
+  * Id : int <<PK>>
+  --
+  * Code : string <<UK>>
+  DisplayName : string
+  IsActive : bool
+  SortOrder : int
+}
+
+entity LearningGoal {
+  * Id : int <<PK>>
+  --
+  * Code : string <<UK>>
+  DisplayName : string
+  IsActive : bool
+  SortOrder : int
+}
+
+entity TandemForm {
+  * Id : int <<PK>>
+  --
+  * Code : string <<UK>>
+  DisplayName : string
+  IsActive : bool
+  SortOrder : int
+}
+
+entity TandemFrequency {
+  * Id : int <<PK>>
+  --
+  * Code : string <<UK>>
+  DisplayName : string
+  IsActive : bool
+  SortOrder : int
+}
+
+
+entity UserKnownLanguage {
+  * UserId : guid <<PK,FK>>
+  * LanguageId : int <<PK,FK>>
+  --
+  Level : enum
+  LevelRank : int
+}
+
+entity UserHobby {
+  * UserId : guid <<PK,FK>>
+  * HobbyId : int <<PK,FK>>
+}
+
+entity UserLearningGoal {
+  * UserId : guid <<PK,FK>>
+  * LearningGoalId : int <<PK,FK>>
+}
+
+entity UserFavorite {
+  * UserId : guid <<PK,FK>>
+  * FavoriteUserId : guid <<PK,FK>>
+  --
+  CreatedAt : datetime
+}
+
+Language        ||--o{ Users : "mother language"
+Language        ||--o{ Users : "target language"
+TandemForm      ||--o{ Users : "preferred form"
+TandemFrequency ||--o{ Users : "preferred frequency"
+
+Users        ||--o{ UserKnownLanguage
+Language     ||--o{ UserKnownLanguage
+Users        ||--o{ UserHobby
+Hobby        ||--o{ UserHobby
+Users        ||--o{ UserLearningGoal
+LearningGoal ||--o{ UserLearningGoal
+
+Users ||--o{ UserFavorite : "initiates"
+Users ||--o{ UserFavorite : "receives"
+
+@enduml
