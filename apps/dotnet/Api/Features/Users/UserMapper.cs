@@ -14,6 +14,7 @@ public class UserMapper
             token
         );
     }
+    // TEST
 
     public static UserProfileDto ToUserProfileDto(User user)
     {
